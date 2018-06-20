@@ -1,0 +1,15 @@
+Bär
+Biene
+Vogel
+Kamel
+Katze
+Huhn
+Hund
+Delfin
+Ente
+Adler
+Affe
+Oktopus
+Eule
+Panda
+Schwein
