@@ -49,6 +49,7 @@ public class Gui extends Application {
 		Label UserTaskInfo;
 		
 		
+		
 		root = createSceneGraph();
 	}
 
@@ -66,23 +67,25 @@ public class Gui extends Application {
 	private Parent createSceneGraph() {
 		BorderPane main = new BorderPane();
 		FlowPane scoreBoard = new FlowPane();
-		Label wordToTranslate = new Label(TL.getNextVocA());
+		String wordToTranslate = new String(TL.getNextVocA());
 		TextField translation = new TextField();
 		Label totalNumberOfCorrectWords= new Label("totalNumberOfCorrectWords");
 		Label personalBest = new Label("personalBest");
-		String dictionarySize = Integer.toString(TL.getDictionary().getSize())+  " WÃ¶rter im WÃ¶rterbuch vorhanden.";
+		String dictionarySize = Integer.toString(TL.getDictionary().getSize())+  " Wörter im Wörterbuch vorhanden.";
 		Label totalNumberOfVocabs= new Label(dictionarySize);
-		Label UserTaskInfo= new Label("Bitte Ã¼bersetze folgendes Wort:");
+		Label UserTaskInfo= new Label("Bitte Übersetze folgendes Wort: "+ wordToTranslate);
 		Label wantedLanguage = new Label(TL.getDictionary().getLanguage2());
 		UserTaskInfo.setPrefSize(700, 100);
 		Label topInfoBoard = new Label("Der Vokabeltrainer 1.0");
 		topInfoBoard.setFont(new Font("Arial", 30));
 		topInfoBoard.setPrefSize(700, 100);
 		Button enter = new Button("okay");
+		Label translationTest = new Label();
 		
 		
 		FlowPane center = new FlowPane();
 		topInfoBoard.setAlignment(Pos.CENTER);
+		translationTest.setText(TL.getVocB());
 		enter.setOnAction(event-> {
 			String guess = translation.getText();
 			try{
@@ -90,6 +93,7 @@ public class Gui extends Application {
 			
 				topInfoBoard.setText("RICHTIG");
 				TL.getNextVocA();
+				
 				}
 			else {
 				topInfoBoard.setText("VERSUCHE ES NOCHMAL");
@@ -104,7 +108,7 @@ public class Gui extends Application {
 		
 		scoreBoard.setPrefSize(200,300);
 		
-		center.getChildren().addAll(UserTaskInfo, wordToTranslate,translation, enter);
+		center.getChildren().addAll(UserTaskInfo,translation, enter, translationTest);
 		
 		
 		//TABS

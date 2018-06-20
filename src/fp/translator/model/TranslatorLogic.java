@@ -58,6 +58,7 @@ public class TranslatorLogic {
 	
 		wordsToBeAsked--;
 		vocA = keys.get(wordsToBeAsked);
+		vocB=getDictionary().getTranslation(vocA);
 		return vocA;
 		
 		
@@ -67,10 +68,13 @@ public class TranslatorLogic {
 		//nicht zwei mal das selbe wort gefragt wird
 	}
 	
+	public String getVocB() {
+		return vocB;
+	}
 	
-	public Boolean checkTranslation(String guess) {
-		vocB=dictionary.getTranslation(vocA);
-		if (vocB==guess) return true;
+	
+	public Boolean checkTranslation(String guess) {	
+		if (guess.toLowerCase().equals(vocB.toLowerCase())) return true;
 		else return false;
 	}
 	public Dictionary getDictionary() {
