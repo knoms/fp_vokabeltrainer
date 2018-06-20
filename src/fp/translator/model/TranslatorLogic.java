@@ -23,7 +23,7 @@ public class TranslatorLogic {
 	Map<String, String> tempData = new HashMap<>();
 	String language1 = dictionary.getLanguage1();
 	String language2 = dictionary.getLanguage2();
-	String vocA= null;
+	private String vocA= null;
 	String vocB = null;
 	Set<String> alreadyAsked = new HashSet();
 	Boolean allWordsAsked =false;
@@ -46,7 +46,7 @@ public class TranslatorLogic {
 		
 		
 		wordsToBeAsked = keys.size();
-		vocA=getNextVocA();
+		setVocA(getNextVocA());
 	}
 	
 	
@@ -57,9 +57,9 @@ public class TranslatorLogic {
 		}
 	
 		wordsToBeAsked--;
-		vocA = keys.get(wordsToBeAsked);
-		vocB=getDictionary().getTranslation(vocA);
-		return vocA;
+		setVocA(keys.get(wordsToBeAsked));
+		vocB=getDictionary().getTranslation(getVocA());
+		return getVocA();
 		
 		
 		
@@ -91,6 +91,16 @@ public void switchLanguages() {
 		dictionary.dictionary.putAll(tempMap);
 		wordsToBeAsked=keys.size();
 	}
+
+
+public String getVocA() {
+	return vocA;
+}
+
+
+public void setVocA(String vocA) {
+	this.vocA = vocA;
+}
 
 	
 	

@@ -25,34 +25,29 @@ public class Gui extends Application {
 	private Parent root;
 	Label wordToTranslate;
 	TextField translation;
-	
+
 	Label totalNumberOfVocabs;
 	Label totalNumberOfCorrectWords;
 	Label personalBest;
 	TranslatorLogic TL = new TranslatorLogic();
-	
-	
 
 	public static void main(String args[]) {
 		launch(args);
 	}
+
 	@Override
 	public void init() {
-		
-		
-		//LABELS
+
+		// LABELS
 		Label wordToTranslate;
 		TextField translation;
 		Label totalNumberOfCorrectWords;
 		Label personalBest;
 		Label totalNumberOfVocabs;
 		Label UserTaskInfo;
-		
-		
-		
+
 		root = createSceneGraph();
 	}
-
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -61,9 +56,8 @@ public class Gui extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
-		
 	}
-	
+
 	private Parent createSceneGraph() {
 		BorderPane main = new BorderPane();
 		FlowPane scoreBoard = new FlowPane();
@@ -71,9 +65,9 @@ public class Gui extends Application {
 		TextField translation = new TextField();
 		Label totalNumberOfCorrectWords= new Label("totalNumberOfCorrectWords");
 		Label personalBest = new Label("personalBest");
-		String dictionarySize = Integer.toString(TL.getDictionary().getSize())+  " Wörter im Wörterbuch vorhanden.";
+		String dictionarySize = Integer.toString(TL.getDictionary().getSize())+  " Woerter im Woerterbuch vorhanden.";
 		Label totalNumberOfVocabs= new Label(dictionarySize);
-		Label UserTaskInfo= new Label("Bitte Übersetze folgendes Wort: "+ wordToTranslate);
+		Label UserTaskInfo= new Label("Bitte Uebersetze folgendes Wort: "+ wordToTranslate);
 		Label wantedLanguage = new Label(TL.getDictionary().getLanguage2());
 		UserTaskInfo.setPrefSize(700, 100);
 		Label topInfoBoard = new Label("Der Vokabeltrainer 1.0");
@@ -88,20 +82,23 @@ public class Gui extends Application {
 		translationTest.setText(TL.getVocB());
 		enter.setOnAction(event-> {
 			String guess = translation.getText();
-			try{
-				if(TL.checkTranslation(guess)) {
-			
-				topInfoBoard.setText("RICHTIG");
-				TL.getNextVocA();
+				if(guess.length()==0) {
+					topInfoBoard.setText("Es wurde nichts eingegeben");
+					
+				} 
 				
-				}
-			else {
-				topInfoBoard.setText("VERSUCHE ES NOCHMAL");
-			}
-				}
-		catch(DictionaryException dE) { 
-			topInfoBoard.setText(dE.getMessage());}
-		});
+				else { 
+						
+						if(TL.checkTranslation(guess)) {
+							topInfoBoard.setText("RICHTIG");
+							TL.getNextVocA();
+							UserTaskInfo.setText("Bitte Uebersetze folgendes Wort: " + TL.getVocA());
+						}
+						else {
+							topInfoBoard.setText("VERSUCHE ES NOCHMAL");
+						}
+					}
+				});
 		
 		
 		//MAINTAB
@@ -176,7 +173,5 @@ public class Gui extends Application {
 		return tabPane;
 		
 	}
-	
-	
-	
+
 }
