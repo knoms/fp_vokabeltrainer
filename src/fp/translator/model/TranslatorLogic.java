@@ -40,8 +40,8 @@ public class TranslatorLogic {
 		dictionary = new Dictionary();
 		tempData.putAll(dictionary.dictionary);
 		
-		keys = new LinkedList(dictionary.dictionary.values());
-		
+		keys = new LinkedList();
+		keys.addAll(dictionary.dictionary.keySet());
 		Collections.shuffle(keys);
 		
 		
